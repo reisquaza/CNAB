@@ -1,5 +1,71 @@
-<table>
-    <tr>
-        <th></th>
-    </tr>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        padding: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <table id="table">
+      <tr>
+        <th>Tipo</th>
+        <th>Data</th>
+        <th>Valor</th>
+        <th>CPF</th>
+        <th>Cartão</th>
+        <th>Hora</th>
+        <th>Dono da loja</th>
+        <th>Nome loja</th>
+      </tr>
+    </table>
+
+    <script>
+        {{data|safe}}.forEach(({type,date, value, cpf, credit_card, attendance_hour, shop_owner, shop_name}) => {
+            const table = document.getElementById('table')
+            const tr = document.createElement('tr')
+            const td_type = document.createElement('td')
+            const td_date = document.createElement('td')
+            const td_value = document.createElement('td')
+            const td_cpf = document.createElement('td')
+            const td_credit_card = document.createElement('td')
+            const td_attendance_hour = document.createElement('td')
+            const td_shop_owner = document.createElement('td')
+            const td_shop_name = document.createElement('td')
+
+            td_type.innerText = type
+            td_date.innerText = date
+            td_value.innerText = value
+            td_cpf.innerText = cpf
+            td_credit_card.innerText = credit_card
+            td_attendance_hour.innerText = attendance_hour
+            td_shop_owner.innerText = shop_owner
+            td_shop_name.innerText = shop_name
+
+            tr.append(td_type,td_date, td_value, td_cpf, td_credit_card, td_attendance_hour, td_shop_owner, td_shop_name)
+            table.append(tr)
+      })
+    </script>
+
+    <!-- <script type="text/javascript">
+      const td = document.createElement("td");
+
+      const data = {{data|safe}}
+
+      function create_td(data) {
+        console.log(data)
+      }
+
+      create_td(data)
+    </script> -->
+  </body>
+</html>

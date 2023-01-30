@@ -5,7 +5,7 @@ from .serializers import TransactionnsSerializer
 from .utils.mixins import TransactionMixin
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.views import APIView, Response, status
-from django.http import  HttpResponseRedirect
+from django.http import HttpResponseRedirect
 import os
 import ipdb
 
@@ -22,24 +22,32 @@ def home_view(request):
             file_arr = file_text.split("\n")
             # ipdb.set_trace()
 
-            for item in file_arr:
-                obj = {
-                    "type": item[0],
-                    "date": f"{item[1:5]}-{item[5:7]}-{item[7:9]}",
-                    "value": item[9:19],
-                    "cpf": item[19:30],
-                    "credit_card": item[30:42],
-                    "attendance_hour": f"{item[42:44]}:{item[44:46]}:{item[46:48]}",
-                    "shop_owner": item[48:62],
-                    "shop_name": item[62:80],
-                }
-                # ipdb.set_trace()
+            # for line in file_arr:
+            #     ipdb.set_trace()
 
-            serializer = TransactionnsSerializer(data=obj)
+            data = []
+
+            for line in file_arr:
+                obj = {
+                    "type": line[0],
+                    "date": f"{line[1:5]}-{line[5:7]}-{line[7:9]}",
+                    "value": line[9:19],
+                    "cpf": line[19:30],
+                    "credit_card": line[30:42],
+                    "attendance_hour": f"{line[42:44]}:{line[44:46]}:{line[46:48]}",
+                    "shop_owner": line[48:62],
+                    "shop_name": line[62:80],
+                }
+                data.append(obj)
+
+            # ipdb.set_trace()
+            serializer = TransactionnsSerializer(data=data, many=True)
             serializer.is_valid(raise_exception=True)
             serializer.save()
 
-            # return HttpResponseRedirect("/thanks/")
+            context["data"] = data
+
+            return render(request, "table.html", context)
 
         else:
             form = UploadTransactionFileForm()
