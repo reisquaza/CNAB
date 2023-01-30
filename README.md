@@ -10,7 +10,7 @@ A aplicação recebe o arquivo através de um formalário, formata os dados rece
   - [Tecnologias](#tecnologias)
   - [Introdução](#introdução)
     - [1. Crie seu ambiente virtual](#1-crie-seu-ambiente-virtual)
-    - [2. Ative seu venv:](#2-ative-seu-venv)
+    - [2. Ative seu venv](#2-ative-seu-venv)
     - [3. Instale as dependencias](#3-instale-as-dependencias)
     - [4. Executar localmente](#4-executar-localmente)
     - [5. Rotas](#5-rotas)
@@ -37,7 +37,7 @@ Lista das tecnologias utilizadas no projeto:
 python -m venv venv
 ```
 
-### 2. Ative seu venv:
+### 2. Ative seu venv
 
 ```bash
 # linux:
